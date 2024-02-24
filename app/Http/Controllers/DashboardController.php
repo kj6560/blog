@@ -114,7 +114,6 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', 'category deletion failed');
         }
     }
-
     public function createPost(Request $request)
     {
         if (!$this->_access()) {
@@ -124,7 +123,6 @@ class DashboardController extends Controller
 
         return view('dashboard.createPost', ['categories' => $categories,'site_settings'=>$request->get('site_settings')]);
     }
-
     public function storePostMedia(Request $request)
     {
         try {
@@ -196,7 +194,6 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', 'post creation failed');
         }
     }
-
     public function listPost(Request $request)
     {
         if (!$this->_access()) {
