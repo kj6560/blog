@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SiteController::class,'index']);
-Route::get('/login', [UserController::class,'login']);
+Route::get('/login', [UserController::class,'login'])->name("login");
 Route::get('/register', [UserController::class,'register'])->name('register');
 Route::post('/createUser', [UserController::class, 'createUser'])->name('createUser');
 Route::post('/loginAuthentication', [UserController::class,'loginAuthentication']);

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard Nomad Minds</title>
+    <title>Dashboard Nomad Pulse</title>
 
     <meta name="description" content="" />
 
@@ -54,7 +54,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Nomad Minds</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Nomad Pulse</span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
