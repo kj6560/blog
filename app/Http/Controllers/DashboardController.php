@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\PageMeta;
 use App\Models\Post;
 use Exception;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class DashboardController extends Controller
         if (!$this->_access()) {
             return redirect()->route('myprofile');
         }
-        return view('dashboard.index');
+        return view('dashboard.index',['site_settings'=>$request->get('site_settings')]);
     }
     public function createCategory(Request $request)
     {
@@ -33,7 +34,7 @@ class DashboardController extends Controller
             return redirect()->route('myprofile');
         }
         $categories = Category::where('parent_id', 0)->orderBy('id', 'desc')->get();
-        return view('dashboard.createCategory', ['parent_categories' => $categories]);
+        return view('dashboard.createCategory', ['parent_categories' => $categories,'site_settings'=>$request->get('site_settings')]);
     }
     public function storeCategory(Request $request)
     {
@@ -91,7 +92,7 @@ class DashboardController extends Controller
         }
         $category = Category::find($id);
         $categories = Category::where('parent_id', 0)->orderBy('id', 'desc')->get();
-        return view('dashboard.createCategory', ['category' => $category, 'parent_categories' => $categories]);
+        return view('dashboard.createCategory', ['category' => $category, 'parent_categories' => $categories,'site_settings'=>$request->get('site_settings')]);
     }
     public function categoryList(Request $request)
     {
@@ -99,7 +100,7 @@ class DashboardController extends Controller
             return redirect()->route('myprofile');
         }
         $categories = Category::orderBy('id', 'desc')->get();
-        return view('dashboard.categoryList', ['categories' => $categories]);
+        return view('dashboard.categoryList', ['categories' => $categories,'site_settings'=>$request->get('site_settings')]);
     }
     public function deleteCategory(Request $request, $id)
     {
@@ -121,7 +122,7 @@ class DashboardController extends Controller
         }
         $categories = Category::orderBy('id', 'desc')->get();
 
-        return view('dashboard.createPost', ['categories' => $categories]);
+        return view('dashboard.createPost', ['categories' => $categories,'site_settings'=>$request->get('site_settings')]);
     }
 
     public function storePostMedia(Request $request)
@@ -171,6 +172,7 @@ class DashboardController extends Controller
         }
 
         $post->title = $data['title'];
+        $post->author = Auth::user()->id;
         $post->sub_title = $data['sub_title'];
         $post->slug = $this->createSlug($data['title']);
         $post->content = $data['content'];
@@ -180,7 +182,16 @@ class DashboardController extends Controller
             $post->header_image = $upload['file_name'];
         }
         if ($post->save()) {
-            return redirect()->back()->with('success', 'post created successfully');
+            $pageMeta = new PageMeta();
+            $pageMeta->url = "/postDetails/".$post->slug;
+            $pageMeta->title = $post->title;
+            $pageMeta->description = $data["description"];
+            if($pageMeta->save()){
+                return redirect()->back()->with('success', 'post created successfully');
+            }else{
+                return redirect()->back()->with('error', 'post creation failed');
+            }
+            
         } else {
             return redirect()->back()->with('error', 'post creation failed');
         }
@@ -192,14 +203,14 @@ class DashboardController extends Controller
             return redirect()->route('myprofile');
         }
         $posts = DB::table("posts as p")->leftJoin('categories as pc', 'p.category_id', '=', 'pc.id')->select("p.id as id", "p.title", "p.slug", "p.status", "p.created_at", "pc.name as category")->orderBy('p.id', 'desc')->get();
-        return view('dashboard.listPost', ['posts' => $posts]);
+        return view('dashboard.listPost', ['posts' => $posts,'site_settings'=>$request->get('site_settings')]);
     }
     public function editPost(Request $request, $id)
     {
         if (!empty($id)) {
-            $post = Post::find($id);
+            $post = DB::table("posts as p")->leftJoin('page_metas as pm', 'p.title', '=', 'pm.title')->select("p.*","pm.description")->where('p.id',$id)->first();
             $categories = Category::orderBy('id', 'desc')->get();
-            return view('dashboard.createPost', ['post' => $post, 'categories' => $categories]);
+            return view('dashboard.createPost', ['post' => $post, 'categories' => $categories,'site_settings'=>$request->get('site_settings')]);
         }
     }
     public function deletePost(Request $request, $id)
@@ -207,7 +218,6 @@ class DashboardController extends Controller
         if (!$this->_access()) {
             return  redirect('/')->with('error', 'you are not authorized to access this page');
         }
-        $category = Post::find($id);
         if (!empty($id) && Post::destroy($id)) {
             return redirect()->back()->with('success', 'category deletion successfully');
         } else {

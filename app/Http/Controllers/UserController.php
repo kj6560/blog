@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        return view('auth.login');
+        return view('auth.login',['site_settings'=>$request->get('site_settings')]);
     }
     public function loginAuthentication(Request $request)
     {
@@ -32,7 +32,7 @@ class UserController extends Controller
     }
     public function register(Request $request)
     {
-        return view('auth.register');
+        return view('auth.register',['site_settings'=>$request->get('site_settings')]);
     }
 
     public function createUser(Request $request)
@@ -75,6 +75,6 @@ class UserController extends Controller
     }
     public function myprofile(Request $request){
         $user = Auth::user();
-        return view('site.myprofile',compact('user'));
+        return view('site.myprofile',["user"=>$user,'site_settings'=>$request->get('site_settings')]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SiteSetting;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -121,7 +122,7 @@ class Controller extends BaseController
     }
     public function getSettings()
     {
-        $settings = SiteSettings::all();
+        $settings = SiteSetting::all();
         $all_settings = array();
         foreach ($settings as $setting) {
             $all_settings[$setting['site_key']] = $setting['site_value'];
