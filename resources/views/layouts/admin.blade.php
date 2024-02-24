@@ -73,21 +73,7 @@
                         </a>
                     </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Users</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/dashboard/users" class="menu-link">
-                                    <div data-i18n="Without menu">All Users </div>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
+                    
 
                     <!-- category -->
                     <li class="menu-item">
@@ -134,46 +120,7 @@
                     </li>
 
                     
-                    <!-- Events -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Events</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/dashboard/createEvents" class="menu-link">
-                                    <div data-i18n="Without menu">Create Events</div>
-                                </a>
-                            </li>
-
-                            <li class="menu-item">
-                                <a href="/dashboard/eventsList" class="menu-link">
-                                    <div data-i18n="Without navbar">List Events</div>
-                                </a>
-                            </li>
-
-                            <li class="menu-item">
-                                <a href="/dashboard/eventUsers" class="menu-link">
-                                    <div data-i18n="Without menu">Event Users</div>
-                                </a>
-                            </li>
-
-                            <li class="menu-item">
-                                <a href="/dashboard/eventGallery" class="menu-link">
-                                    <div data-i18n="Without menu">Event Gallery </div>
-                                </a>
-                            </li>
-
-                            <li class="menu-item">
-                                <a href="/dashboard/eventSliders" class="menu-link">
-                                    <div data-i18n="Without menu">Event Sliders</div>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                    
 
 
                     <!-- Email Settings -->
@@ -212,22 +159,15 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <!-- Gallery -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Gallery</div>
-                        </a>
-
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="/dashboard/siteGallery" class="menu-link">
-                                    <div data-i18n="Without menu">Site Gallery </div>
+                                <a href="/dashboard/createSiteSettings" class="menu-link">
+                                    <div data-i18n="Without menu">Create Site Settings </div>
                                 </a>
                             </li>
                         </ul>
                     </li>
+                    
                     <!-- Event Results -->
 
                 </ul>
