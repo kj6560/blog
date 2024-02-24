@@ -79,6 +79,13 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <label for="html5-text-input" class="col-md-2 col-form-label">Seo Meta Description</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" autocomplete=false name="description" value="{{isset($post) && $post->description?$post->description:''}}" placeholder="Enter Short Description" id="html5-text-input" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
                                 <label for="html5-text-input" class="col-md-2 col-form-label">Header Image</label>
                                 <div class="col-md-10">
                                     <input class="form-control" type="file" name="header_image" id="html5-text-input" />
