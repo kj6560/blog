@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\PageMeta;
 use App\Models\Post;
+use App\Models\SiteSetting;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Svg\Tag\Rect;
 
 class DashboardController extends Controller
 {
@@ -221,4 +223,47 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', 'category deletion failed');
         }
     }
+    public function siteSettingsList(Request $request){
+        if (!$this->_access()) {
+            return redirect()->route('myprofile');
+        }
+        $site_settings = DB::table("site_settings")->get();
+        return view('dashboard.siteSettingsList', ['settings' => $site_settings, 'site_settings'=>$request->get('site_settings')]);
+    }
+    public function createSiteSettings(Request $request){
+        if (!$this->_access()) {
+            return redirect()->route('myprofile');
+        }
+        return view('dashboard.createSiteSettings', ['site_settings'=>$request->get('site_settings')]);
+    }
+    public function storeSiteSettings(Request $request){
+        if (!$this->_access()) {
+            return redirect()->route('myprofile');
+        }
+        $data = $request->all();
+        unset($data['_token']);
+
+        if($data['id']){
+            $site_setting = SiteSetting::find($data['id']);
+        }else{
+            $site_setting = new SiteSetting();
+        }
+        $site_setting->key = $data['key'];
+        $site_setting->value = $data['value'];
+        $site_setting->status = $data['status'];
+        $site_setting->description = $data['description'];
+        if($site_setting->save()){
+            return redirect()->back()->with('success', 'site settings created successfully');
+        }else{
+            return redirect()->back()->with('error', 'site settings creation failed');
+        }
+    }
+    public function editSiteSettings(Request $request, $id){
+        if(!$this->_access()){
+            return redirect()->route('myprofile');
+        }
+        $site_setting = DB::table("site_settings")->where('id', $id)->first();
+        return view('dashboard.createSiteSettings', ['setting'=>$site_setting, 'site_settings'=>$request->get('site_settings')]);
+    }
 }
+ 

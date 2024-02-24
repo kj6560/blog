@@ -41,6 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/postList',[DashboardController::class,'listPost'])->name('listPost');
     Route::get('/dashboard/editPost/{id}',[DashboardController::class,'editPost'])->name('editPost');
     Route::get('/dashboard/deletePost/{id}',[DashboardController::class,'deletePost'])->name('deletePost');
+    Route::get('/dashboard/siteSettingsList',[DashboardController::class,'siteSettingsList'])->name('siteSettingsList');
+    Route::get('/dashboard/createSiteSettings',[DashboardController::class,'createSiteSettings'])->name('createSiteSettings');
+    Route::get('/dashboard/editSiteSettings/{id}',[DashboardController::class,'editSiteSettings'])->name('editSiteSettings');
+    Route::post('/dashboard/storeSiteSettings',[DashboardController::class,'storeSiteSettings'])->name('storeSiteSettings');
+    //dashboard/storeSiteSettings
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
 require __DIR__.'/auth.php';
+ 
