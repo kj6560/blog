@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Nomad Pulse</a>
+                <a class="navbar-brand" href="/">{{$site_settings['site_name']}}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Nomad Pulse 2024</div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; {{$site_settings['site_name']}} 2024</div>
                     </div>
                 </div>
             </div>
